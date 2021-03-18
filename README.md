@@ -14,7 +14,7 @@
 
 ----------------------------------------------------------------------------------------------------------------------
 
-#### $\color{lightgreen}{\text{Da includere nell'head come nell'esempio qui sotto}}$
+#### Da includere nell'head come nell'esempio qui sotto
 
 		<!DOCTYPE html>
 		<html lang="it">
@@ -31,6 +31,7 @@
 ----------------------------------------------------------------------------------------------------------------------
 
 ### NODEJS E NPM
+
 [NODEJS](https://nodejs.org/en/download/)  
 
 		// da terminale
@@ -40,7 +41,8 @@
 ----------------------------------------------------------------------------------------------------------------------
 
 ### LARAVEL E LARAVEL-MIX
-[LARAVEL_MIX](#https://laravel-mix.com/docs/6.0/installation)  
+
+[LARAVEL_MIX](https://laravel-mix.com/docs/6.0/installation)  
 
 		// da terminale
 		npm init -y
