@@ -60,14 +60,27 @@
 		// da terminale per compilare scss e "guardare" le modifiche in tempo reale
 		npm mix watch
 
+		/* se avete bisogno di aggiornare laravel-mix
+		andate nel package.json e modificate la versione con quella che volete
+		
+		es.
+		"devDependencies": {
+			"laravel-mix": "^6.0.13"
+		}
+
+		dopodichè da terminale lasciate il comando npm install per installare/aggiornare le dipendenze */		
+
 ----------------------------------------------------------------------------------------------------------------------
 
 ### PATH CSS PER LARAVEL
+
 		<html>
 		<link rel="stylesheet" href="{{asset('css/app.css')}}">
+		
 ----------------------------------------------------------------------------------------------------------------------
 
 ### INSTANZIAMENTO VUEJS
+
 		new Vue({
 			el: '#app',
 			data:{
@@ -100,83 +113,83 @@
 
 ### LINK ICONA PAGINA
 
-        <link rel="icon" href="IMG.png">
-
+		<link rel="icon" href="IMG.png">
 
 ----------------------------------------------------------------------------------------------------------------------
 
 ### ISTRUZIONI PER PAGINA DI ERRORE MAMP
-        cd C:\MAMP\logs\
-        gc -Path php_error.log -Wait
+
+		cd C:\MAMP\logs\
+		gc -Path php_error.log -Wait
 
 ----------------------------------------------------------------------------------------------------------------------
 
 ### SNIPPET VARDUMP MIGLIORE
 
-            echo ‘<pre>’ . var_export($data, true) . ‘</pre>’; 
+		echo ‘<pre>’ . var_export($data, true) . ‘</pre>’; 
 
 ----------------------------------------------------------------------------------------------------------------------
 
 ### LISTA INIZIALIZZAZIONE LARAVEL CRUD
 #### Crea nuovo progetto
-         composer create-project --prefer-dist laravel/laravel:^7.0 MyProject
+
+		composer create-project --prefer-dist laravel/laravel:^7.0 MyProject
 
 #### Per testare il database
-         php artisan tinker
-         DB::Connection()->getPdo()
+
+		php artisan tinker
+		DB::Connection()->getPdo()
 
 #### Creiamo la migration per la nostra nuova tabella
-         php artisan make:migration create_nome_table
+
+		php artisan make:migration create_nome_table
 
 #### Adesso in database/migrations troveremo un nuovo file.
 
 #### Qui i dettagli sui vari tipi di colonne -> https://laravel.com/docs/7.x/migrations#creating-columns
 
 #### Modifica la migration con le colonne necessarie e poi:
-         php artisan migrate  
+
+		php artisan migrate  
 
 #### Per creare il model
-         php artisan make:model NomeModello
+
+		php artisan make:model NomeModello
 
 #### Per creare il controller CRUD
-         php artisan make:controller --resource NomeController
+
+		php artisan make:controller --resource NomeController
 
 #### Installare Bootstrap.
-         composer require laravel/ui:^2.4
 
-         php artisan ui bootstrap
-         npm install
+		composer require laravel/ui:^2.4
 
-----------------------------------------------------------------------------------------------------------------------
-
-### INIZIALIZZARE PROGETTO SOLO SCSS
-         nmp init -y
-         npm install laravel-mix --save-dev
-         npx mix
-#### creare cartelle e modificare webpack.mix.js
-
+		php artisan ui bootstrap
+		npm install
 
 ----------------------------------------------------------------------------------------------------------------------
 
 ### INIZIALIZZARE COMPUTER A COMPOSER E LARAVEL
 #### installare composer con .exe
-         composer install
-         composer update
+
+		composer install
+		composer update
 
 creazione progetto laravel
 
-         composer-create-project  --prefer-dist laravel/laravel:^7.0 nomeProgetto
+		composer-create-project  --prefer-dist laravel/laravel:^7.0 nomeProgetto
 
 andare su package.json
 #### cambiare riga laravel mix con ^6.0.13
-        npm install
+
+		npm install
 
 ----------------------------------------------------------------------------------------------------------------------
 
 ### CREARE UN CONTROLLER
-         php artisan make:controller NomeController
+		php artisan make:controller NomeController
 
-         Route::get('controller','NomeController@metodo')
+		Route::get('controller','NomeController@metodo')
 
 nel controller ricordarsi di creare funzione che ritorni una view
 
@@ -187,7 +200,7 @@ nel controller ricordarsi di creare funzione che ritorni una view
 nel file .env sostituire il nome database e inserire utente e pswrd
 verificare con
 
-         php artisan tinker
+		php artisan tinker
 
 in caso di problemi verificare il file php.ini nella cartella bin di Mamp
 
@@ -195,6 +208,6 @@ in caso di problemi verificare il file php.ini nella cartella bin di Mamp
 ----------------------------------------------------------------------------------------------------------------------
 
 ### CREARE UN MODEL
-         php artisan make:model NomeModello
+		php artisan make:model NomeModello
 ATTENZIONE: il model deve avere lo stesso nome del database al singolare così che laravel possa funzionare!
 
