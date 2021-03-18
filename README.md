@@ -1,16 +1,16 @@
 ### PUOI CERCARE CDN QUI
 
-[JSDELIVER](https://www.jsdelivr.com/)
+[JSDELIVER](https://www.jsdelivr.com/)  
 
 ----------------------------------------------------------------------------------------------------------------------
 
 ### CDN Utilizzate in diversi progetti
 
-[FONTAWESOME FREE v5.15.3](https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.css)
-[JQUERY v3.6.0](https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.js)
-[VUEJS v2.6.12](https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.js)
-[BOOTSTRAP CSS v4.6.0](https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.css)
-[AXIOS v0.21.1](https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.js)
+[FONTAWESOME FREE v5.15.3](https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.css)  
+[JQUERY v3.6.0](https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.js)  
+[VUEJS v2.6.12](https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.js)  
+[BOOTSTRAP CSS v4.6.0](https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.css)  
+[AXIOS v0.21.1](https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.js)  
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -31,7 +31,7 @@
 ----------------------------------------------------------------------------------------------------------------------
 
 ### NODEJS E NPM
-[NODEJS](https://nodejs.org/en/download/)
+[NODEJS](https://nodejs.org/en/download/)  
 
 		// da terminale
 		node -v
@@ -40,7 +40,7 @@
 ----------------------------------------------------------------------------------------------------------------------
 
 ### LARAVEL E LARAVEL-MIX
-[LARAVEL_MIX](https://laravel-mix.com/docs/6.0/installation)
+[LARAVEL_MIX](#https://laravel-mix.com/docs/6.0/installation)  
 
 		// da terminale
 		npm init -y
