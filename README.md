@@ -1,95 +1,126 @@
-### PUOI CERCARE CDN QUI
+<!-- ✨ Magic ✨ -->
 
-[JSDELIVER](https://www.jsdelivr.com/)  
+### Puoi cercare CDN qui
 
-----------------------------------------------------------------------------------------------------------------------
+- [JSDELIVER](https://www.jsdelivr.com/)  
+
+---
 
 ### CDN Utilizzate in diversi progetti
 
-[FONTAWESOME FREE v5.15.3](https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.css)  
-[JQUERY v3.6.0](https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.js)  
-[VUEJS v2.6.12](https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.js)  
-[BOOTSTRAP CSS v4.6.0](https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.css)  
-[AXIOS v0.21.1](https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.js)  
+- [FONTAWESOME FREE](https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.css) - v5.15.3  
+- [JQUERY](https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.js) - v3.6.0   
+- [VUE.JS](https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js) - v2.6.12  
+- [BOOTSTRAP CSS](https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.css) - v4.6.0
+- [AXIOS](https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.js) - v0.21.1
 
-----------------------------------------------------------------------------------------------------------------------
+> Da includere nell'head come nell'esempio
 
-### Da includere nell'head come nell'esempio qui sotto
+```sh
+    <!DOCTYPE html>
+    <html lang="it">
+    <head>
+      <!-- fontawesome -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.css"/>
+    </head>
+```
 
-		<!DOCTYPE html>
-		<html lang="it">
-		<head>
-			<meta charset="UTF-8">
-			<meta http-equiv="X-UA-Compatible" content="IE=edge">
-			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			<!-- fontawesome -->
-			<link rel="stylesheet" href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"/>
-			<title></title>
-		</head>
-		<body>
-		
-
-----------------------------------------------------------------------------------------------------------------------
+---
 
 
-### Versione corta per raccogliere l'indice nel metodo show all'interno del CRUD
+### FILTRARE I DATI - versione lunga e corta
+>Passiamo l'indice al metodo show del Controller CRUD   
+La Classe (Model) troverà il record della tabella con id uguale a quello passato al metodo show() e lo restituirà alla view
 
-     @param  int  $var-name
-     @return \Illuminate\Http\Response
-     
-    public function show(Beer $var-name)
+```sh
+    // versione lunga - long version
+    public function show($id)
     {
-        return view("file.blade",compact('var-name'));
+      // 
+      $var = Model::find($id);
+      return view('nome-della-rotta', ['path-della-view' => $var]));
     }
-    
-    ATTENZIONE: il nome della route deve essere uguale al file blade,
+     
+    // versione corta - short version
+    public function show(Model $id)
+    {
+        return view("nome-della-rotta", compact('id'));
+    }
+```
+`ATTENZIONE` : Da terminale controllare le rotte
 
-----------------------------------------------------------------------------------------------------------------------
+```sh
+    php artisan route:list
+```
 
-### NODEJS E NPM
+---
 
-[NODEJS](https://nodejs.org/en/download/)  
+### Node.js e npm
 
-#### per verificare la versione presente sul pc
-		// da terminale
-		node -v
-		npm -v
+- [NODE.JS](https://nodejs.org/en/download/)  
 
-----------------------------------------------------------------------------------------------------------------------
+>Con l'installazione di Node verrà installato anche il package manager   
+Per verificare le versioni presenti sul pc lanciare i seguenti comandi
+
+```sh
+    node -v
+    npm -v
+```
+
+---
 
 ### LARAVEL E LARAVEL-MIX
 
-[LARAVEL_MIX](https://laravel-mix.com/docs/6.0/installation)  
+- [LARAVEL_MIX](https://laravel-mix.com/docs/6.0/installation)  
 
-		// da terminale
-		npm init -y
-		npm install laravel-mix --save-dev
-		cd my-app
-		touch webpack.mix.js
+>Inizializzare il progetto creando il package.json 
+```sh
+    npm init -y
+```    
 
-		// es. file webpack.mix.js
-		let mix = require('laravel-mix');
-		mix
-			.sass('src/app.scss', 'dist/')
-			.options({ processCssUrls: false })
 
-		// da terminale per compilare scss
-		npm mix
+>Installare laravel-mix
+```sh    
+    npm install laravel-mix --save-dev        
+```
 
-		// da terminale per compilare scss e "guardare" le modifiche in tempo reale
-		npm mix watch
+>Spostarsi nel progetto (la cartella) e creare il file webpack.mix.js
+```sh    
+    cd my-app
+    touch webpack.mix.js    
+```
 
-		/* se avete bisogno di aggiornare laravel-mix
-		andate nel package.json e modificate la versione con quella che volete
-		
-		es.
-		"devDependencies": {
-			"laravel-mix": "^6.0.13"
-		}
+>es. file webpack.mix.js
+```sh    
+    let mix = require('laravel-mix');
+    mix
+      .sass('src/app.scss', 'dist/')
+      .options({ processCssUrls: false })
+```
 
-		dopodichè da terminale lasciate il comando npm install per installare/aggiornare le dipendenze */		
+>Da terminale per compilare scss
+```sh    
+    npx mix
+```
 
-----------------------------------------------------------------------------------------------------------------------
+>Da terminale per compilare scss e "guardare" le modifiche in tempo reale
+```sh    
+    npm mix watch
+```
+
+>Per aggiornare laravel-mix andare nel package.json
+e modificare la versione come nell'esempio
+```sh    
+    "devDependencies": {
+      "laravel-mix": "^6.0.13"
+    }
+```
+>dopodichè da terminale per installare/aggiornare le dipendenze
+```sh
+    npm install
+```
+
+---
 
 ### PATH CSS & JS PER LARAVEL
 
@@ -109,58 +140,65 @@ https://laravel.com/docs/7.x/validation
 
 https://laravel.com/docs/7.x/validation#available-validation-rules
 		
-----------------------------------------------------------------------------------------------------------------------
+---
 
 ### INSTANZIAMENTO VUEJS
 
-		new Vue({
-			el: '#app',
-			data:{
+>script.js
+```sh
+    new Vue({
+      el: '#app',
+      data:{
 
-			},
-			methods: {
+      },
+      methods: {
 
-			},
-			mounted() {
-				
-			
-			});
-		Vue.config.devtools = true;
+      },
+      mounted() {
+        
+      }
+    });
+    Vue.config.devtools = true;
+```
+>Per debug da console app.data o app.method()
+```sh
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: 'Hello Vue!'
+      },
+      methods: {
+        sayHello() {
+          alert('Hello Vue!')
+        }
+      },
+      mounted() {
+        
+      }
+    });
+    Vue.config.devtools = true;
+```
 
-		/* per debug da console app.data o app.method()
-		const app = new Vue({
-			el: '#app',
-		data: {
-			message: 'Hello Vue!'
-		},
-		methods: {
-			sayHello() {
-				alert('Hello Vue!')
-			}
-		}
-		});
-		*/
-
-----------------------------------------------------------------------------------------------------------------------
+---
 
 ### LINK ICONA PAGINA
 
 		<link rel="icon" href="IMG.png">
 
-----------------------------------------------------------------------------------------------------------------------
+---
 
 ### ISTRUZIONI PER PAGINA DI ERRORE MAMP
 
 		cd C:\MAMP\logs\
 		gc -Path php_error.log -Wait
 
-----------------------------------------------------------------------------------------------------------------------
+---
 
 ### SNIPPET VARDUMP MIGLIORE
 
 		echo ‘<pre>’ . var_export($data, true) . ‘</pre>’; 
 
-----------------------------------------------------------------------------------------------------------------------
+---
 
 ### LISTA INIZIALIZZAZIONE LARAVEL CRUD
 #### Crea nuovo progetto
@@ -199,7 +237,7 @@ https://laravel.com/docs/7.x/validation#available-validation-rules
 		php artisan ui bootstrap
 		npm install
 
-----------------------------------------------------------------------------------------------------------------------
+---
 
 ### INIZIALIZZARE COMPUTER A COMPOSER E LARAVEL
 #### installare composer con .exe
@@ -216,7 +254,7 @@ andare su package.json
 
 		npm install
 
-----------------------------------------------------------------------------------------------------------------------
+---
 
 ### CREARE UN CONTROLLER
 		php artisan make:controller NomeController
@@ -225,7 +263,7 @@ andare su package.json
 
 nel controller ricordarsi di creare funzione che ritorni una view
 
-----------------------------------------------------------------------------------------------------------------------
+---
 
 ### IMPOSTARE DATABASE
 
@@ -237,14 +275,14 @@ verificare con
 in caso di problemi verificare il file php.ini nella cartella bin di Mamp
 
 
-----------------------------------------------------------------------------------------------------------------------
+---
 
 ### CREARE UN MODEL
 		php artisan make:model NomeModello
 ATTENZIONE: il model deve avere lo stesso nome del database al singolare così che laravel possa funzionare!
 
 
-----------------------------------------------------------------------------------------------------------------------
+---
 
 
 ### INSTALLAZIONE BOOTSTRAP FRAMEWORK IN LARAVEL
@@ -280,7 +318,7 @@ questo comando eseguirà un download dei webpack aggiornati della nostra nuova d
 fatto questo eseguire eventuali comandi richiesti dal terminale.
 
 
-----------------------------------------------------------------------------------------------------------------------
+---
 
 
 ### CAMBIARE INDENTAZIONE EXPLORER FILE TREE VScode
@@ -291,7 +329,7 @@ sulla barra **'search settings'** scrivere **"tree"** (senza apici) poi sotto
 #### User -> Workbench 
 e sotto **Workbench** click su **Appearance** quindi aumentare il valore sotto a **'Controls tree indentation in pixels.'** e premere INVIO.
 
-----------------------------------------------------------------------------------------------------------------------
+---
 ## CREARE UN NUOVO ITEM IN DATABASE
 
 1. Nel metodo **create** definire la view dove si trova il **form** con un semplice **return** che ritorni la view.
