@@ -256,3 +256,12 @@ questo comando aggiorna le dipendenze del nostro file package.json aggiungendo a
 
 questo comando eseguirà un download dei webpack aggiornati della nostra nuova dipendenza bootstrap
 fatto questo eseguire eventuali comandi richiesti dal terminale.
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+
+### CAMBIARE INDENTAZIONE EXPLORER FILE TREE VScode
+
+
+File -> Preferences -> Settings -> sulla barra 'search settings' scrivere "tree" (senza apici) poi sotto User -> Workbench e sotto Workbench click su Appearance quindi aumentare il valore sotto a 'Controls tree indentation in pixels.' e premere INVIO.
