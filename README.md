@@ -27,6 +27,22 @@
 			<title></title>
 		</head>
 		<body>
+		
+
+----------------------------------------------------------------------------------------------------------------------
+
+
+#### Versone corta per raccogliere l'indice nel metodo show all'interno del CRUD
+
+     @param  int  $var-name
+     @return \Illuminate\Http\Response
+     
+    public function show(Beer $var-name)
+    {
+        return view("file.blade",compact('var-name'));
+    }
+    
+    ATTENZIONE: il nome della route deve essere uguale al file blade,
 
 ----------------------------------------------------------------------------------------------------------------------
 
