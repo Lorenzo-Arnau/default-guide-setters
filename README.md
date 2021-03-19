@@ -334,5 +334,71 @@ per vedere cosa abbiamo passato nel form bisogna andare in
 
 			$oggettoStored=Oggetto::orderBy('id','desc')->first();
 			return redirect()->route('oggetto.show',$oggettoStored)		
+---
+
+## VALIDATION DI BOOTSTRAP (PER CAMPI OBBLIGATORI)
 
 
+[DOCUMENTAZIONE VALIDATE BOOTSTRAP](https://getbootstrap.com/docs/4.0/components/forms/)
+
+#### STEP 1
+
+Per implementare la validazione di Boostrap bisogna per prima cosa inserire nel tag `<form>`, il `novalidate` alla fine del form.
+
+Esempio:
+
+`<form class="needs-validation" action="{{route('beers.store')}}" method="post" novalidate>`
+
+#### STEP 2
+Dopo aver inserito il `novalidate` bisogna andare all'interno di ogni tag `<input>` che si desidera sia obbligatorio per l'utente ed aggiungere il `required`.
+
+Esempio:
+
+`<input  class="form-control" type="text" name="name" placeholder="Nome" required>`
+
+#### STEP 3
+Dopodichè inserire dopo il tag `<input>` un `div` con `class="invalid-feedback"` se si desidera segnalare l'errore, altrimenti se si vuole mostrare un messaggio di inserimento input corretto usare `class="valid-feedback"`.
+All'interno del `div` in questione inserire il messaggio che si vuole mostrare all'utente.
+se si vuole utilizzare tutti e due i controlli, inserire un `div` con `class="valid-feedback"` e subito sotto un'altro `div` con `class="invalid-feedback"`.
+
+Esempio:
+
+		<div class="form-group my-form">
+            <label for="image">URL Immagine</label>
+            <input class="form-control" type="text" name="image" placeholder="URL" required>
+            <div class="invalid-feedback">
+                Perfavore inserisci l' URL
+            </div>
+            <div class="valid-feddbak">
+                Looks Great!
+            </div>
+        </div>
+
+
+#### STEP 4 
+Copiare ed incollora lo script js dalla documentazione di bootstrap, direttamente sotto il form nell'HTML.
+
+Script:
+
+	<script>
+		// Example starter JavaScript for disabling form submissions if there are invalid fields
+		(function() {
+		'use strict';
+		window.addEventListener('load', function() {
+			// Fetch all the forms we want to apply custom Bootstrap validation styles to
+			var forms = document.getElementsByClassName('needs-validation');
+			// Loop over them and prevent submission
+			var validation = Array.prototype.filter.call(forms, function(form) {
+			form.addEventListener('submit', function(event) {
+				if (form.checkValidity() === false) {
+				event.preventDefault();
+				event.stopPropagation();
+				}
+				form.classList.add('was-validated');
+			}, false);
+			});
+		}, false);
+		})();
+	</script>
+
+---
