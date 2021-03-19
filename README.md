@@ -14,7 +14,7 @@
 
 ----------------------------------------------------------------------------------------------------------------------
 
-#### Da includere nell'head come nell'esempio qui sotto
+### Da includere nell'head come nell'esempio qui sotto
 
 		<!DOCTYPE html>
 		<html lang="it">
@@ -32,7 +32,7 @@
 ----------------------------------------------------------------------------------------------------------------------
 
 
-#### Versione corta per raccogliere l'indice nel metodo show all'interno del CRUD
+### Versione corta per raccogliere l'indice nel metodo show all'interno del CRUD
 
      @param  int  $var-name
      @return \Illuminate\Http\Response
@@ -240,19 +240,28 @@ ATTENZIONE: il model deve avere lo stesso nome del database al singolare così c
 
 1. Per installare Bootstrap nel nostro progetto laravel, bisogna puntare da terminale alla repo-progetto nella quale ci interessa installare Bootstrap e lanciare il comando:
 
-    composer require laravel/ui:^2.4
+
+   		 composer require laravel/ui:^2.4
+
 
 
 2. terminata l'installazione dei pacchetti eseguire il comando
 
-    php artisan ui bootstrap
+
+    	php artisan ui bootstrap
+
+
 
 
 questo comando aggiorna le dipendenze del nostro file package.json aggiungendo appunto la dipendenza di bootstrap.
 
 3. il terminale ci chiederà di eseguire il comando 
 
-    npm install
+
+
+   		 npm install
+
+
 
 questo comando eseguirà un download dei webpack aggiornati della nostra nuova dipendenza bootstrap
 fatto questo eseguire eventuali comandi richiesti dal terminale.
@@ -264,4 +273,53 @@ fatto questo eseguire eventuali comandi richiesti dal terminale.
 ### CAMBIARE INDENTAZIONE EXPLORER FILE TREE VScode
 
 
-File -> Preferences -> Settings -> sulla barra 'search settings' scrivere "tree" (senza apici) poi sotto User -> Workbench e sotto Workbench click su Appearance quindi aumentare il valore sotto a 'Controls tree indentation in pixels.' e premere INVIO.
+#### File -> Preferences -> Settings -> 
+sulla barra **'search settings'** scrivere **"tree"** (senza apici) poi sotto
+#### User -> Workbench 
+e sotto **Workbench** click su **Appearance** quindi aumentare il valore sotto a **'Controls tree indentation in pixels.'** e premere INVIO.
+
+----------------------------------------------------------------------------------------------------------------------
+## CREARE UN NUOVO ITEM IN DATABASE
+
+1. Nel metodo **create** definire la view dove si trova il **form** con un semplice **return** che ritorni la view.
+
+2. #### alla creazione del form sono indispensabili queste cose:
+
+
+		 <form action="{{route('oggetto.store')}}" method="post">
+         @csrf
+         @method('POST')
+
+il **@csfr** è un sistema di verifica di Laravel aggiuntivo.
+
+il **@method('POST')** serve per indicare a Laravel quale metodo utilizzeremo(POST,DELETE ecc ecc)
+
+per vedere cosa abbiamo passato nel form bisogna andare in
+
+		network->nome(post)->headers->form data
+
+**ATTENZIONE** il valore name="" di ciascun input deve essere uguale a quelli che passiamo nella variabile **$fillable** nel **Metodo**( punto 3 )		
+
+3. Nella sezione Store mettiamo in variabile i dati inviati dal form
+
+		$data=$request->all();
+
+   Inizializziamo un nuovo oggetto
+
+		$oggetto=new Oggetto();
+
+	Andiamo a completare il Metodo aggiungendo la variabile fillable con i campi del nostro database
+
+		protected $fillable=['param1','param2','param3','param4']
+
+	tornaimo nella sezione **store** e aggiungiamo
+
+			$oggetto->fill($data)
+			$oggetto->save()
+
+	al salvataggio ritorniamo l'ultimo oggetto creato ,mostrato nel metodo **show**
+
+			$oggettoStored=Oggetto::orderBy('id','desc')->first();
+			return redirect()->route('oggetto.show',$oggettoStored)		
+
+
