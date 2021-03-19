@@ -91,10 +91,23 @@
 
 ----------------------------------------------------------------------------------------------------------------------
 
-### PATH CSS PER LARAVEL
+### PATH CSS & JS PER LARAVEL
 
-		<html>
+		
 		<link rel="stylesheet" href="{{asset('css/app.css')}}">
+		
+		<script src="{{ asset('js/app.js') }}"></script> (edited) 
+
+#### LINK DOCUMENTAZIONE FILL/FILLABLE
+
+  https://laravel.com/docs/7.x/eloquent#mass-assignment
+
+
+#### LINK SULLA VALIDAZIONE DEI CAMPI DEL FORM IN LARAVEL 
+
+https://laravel.com/docs/7.x/validation
+
+https://laravel.com/docs/7.x/validation#available-validation-rules
 		
 ----------------------------------------------------------------------------------------------------------------------
 
