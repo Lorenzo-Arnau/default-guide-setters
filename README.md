@@ -32,7 +32,7 @@
 ----------------------------------------------------------------------------------------------------------------------
 
 
-#### Versone corta per raccogliere l'indice nel metodo show all'interno del CRUD
+#### Versione corta per raccogliere l'indice nel metodo show all'interno del CRUD
 
      @param  int  $var-name
      @return \Illuminate\Http\Response
@@ -230,3 +230,29 @@ in caso di problemi verificare il file php.ini nella cartella bin di Mamp
 		php artisan make:model NomeModello
 ATTENZIONE: il model deve avere lo stesso nome del database al singolare così che laravel possa funzionare!
 
+
+----------------------------------------------------------------------------------------------------------------------
+
+
+### INSTALLAZIONE BOOTSTRAP FRAMEWORK IN LARAVEL
+
+**NB prima di procedere all'installazione di Bootstrap, assicurarsi di aver inizializzato laravel-mix**
+
+1. Per installare Bootstrap nel nostro progetto laravel, bisogna puntare da terminale alla repo-progetto nella quale ci interessa installare Bootstrap e lanciare il comando:
+
+    composer require laravel/ui:^2.4
+
+
+2. terminata l'installazione dei pacchetti eseguire il comando
+
+    php artisan ui bootstrap
+
+
+questo comando aggiorna le dipendenze del nostro file package.json aggiungendo appunto la dipendenza di bootstrap.
+
+3. il terminale ci chiederà di eseguire il comando 
+
+    npm install
+
+questo comando eseguirà un download dei webpack aggiornati della nostra nuova dipendenza bootstrap
+fatto questo eseguire eventuali comandi richiesti dal terminale.
