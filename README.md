@@ -34,6 +34,7 @@
 
 [NODEJS](https://nodejs.org/en/download/)  
 
+#### per verificare la versione presente sul pc
 		// da terminale
 		node -v
 		npm -v
