@@ -440,3 +440,52 @@ Script:
 	</script>
 
 ---
+
+## INSERIRE UNA MODALE (POP-UP) BOOTSTRAP IN UN PROGETTO LARAVEL
+Documentazione Modale : https://getbootstrap.com/docs/4.0/components/modal/
+
+
+La modale di bootstrap funziona grazie a **due** componenti principali, il button con le classi di riferimento , e la modale pre-composta di bootstrap
+
+*Consiglio*: La modale può essere messa in un file modal.blade.php a parte e poi essere richiamata nel codice principale con @include quando serve per tenere lo stesso più pulito.
+
+
+  Questo è il codice del bottone con riferimento alla modale -->
+
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+      Cliccando qui si apre la modale
+    </button>
+
+
+
+ Questo è il codice della modale che può essere salvato nel file .php e richiamato con @include -->
+
+
+          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Titolo della modale</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                 "testo della modale"
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+Per far si che il codice funzioni bootstrap utilizza js, quindi bisogna ricordarsi di importare lo stesso nell'head della pagina principale utilizzando
+
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+se uniamo questa modale, assegnando a uno dei bottoni della stessa il type **'submit'**, e inserendo il tutto all'interno di un **form** possiamo utilizzarlo come step di conferma per l'utente su una determinata azione che vogliamo effettuare su db_. 
+
+---
