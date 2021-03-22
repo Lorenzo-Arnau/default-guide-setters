@@ -449,11 +449,12 @@ La modale di bootstrap funziona grazie a **due** componenti principali, il butto
 
 *Consiglio*: La modale può essere messa in un file modal.blade.php a parte e poi essere richiamata nel codice principale con @include quando serve per tenere lo stesso più pulito.
 
-
+**ATTENZIONE**
+##### bisogna rendere univoche le classi della modale passando l'id dell'item sia nella modale che nel button!!!!!
   Questo è il codice del bottone con riferimento alla modale -->
 
 
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter{{$item->id}}">
       Cliccando qui si apre la modale
     </button>
 
@@ -462,7 +463,7 @@ La modale di bootstrap funziona grazie a **due** componenti principali, il butto
  Questo è il codice della modale che può essere salvato nel file .php e richiamato con @include -->
 
 
-          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+          <div class="modal fade" id="exampleModalCenter{{$item->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
