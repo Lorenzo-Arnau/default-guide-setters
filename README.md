@@ -490,3 +490,46 @@ Per far si che il codice funzioni bootstrap utilizza js, quindi bisogna ricordar
 se uniamo questa modale, assegnando a uno dei bottoni della stessa il type **'submit'**, e inserendo il tutto all'interno di un **form** possiamo utilizzarlo come step di conferma per l'utente su una determinata azione che vogliamo effettuare su db_. 
 
 ---
+
+# CREARE UNA SEARCH BASE NELL'CRUD (LARAVEL) 
+
+## STEP 1
+
+Creare una search nel layout con metodo GET, e con un "name" che useremo come request
+
+<form action="{{ route('root.index') }}" method="POST" role="search">
+     @csrf
+     @method("GET")
+     <div class="input-group">
+         <div class="form-outline">
+             <input type="search" id="form1" class="form-control" name="item"
+                 placeholder="Cerca item" />
+         </div>
+        <button type="submit" class="btn btn-primary">
+            <i class="fas fa-search"></i>
+        </button>
+    </div>
+</form>
+
+## step 2
+
+Far passare la ricchiesta all'index, verificarne l'esistenza, e filtrare con il metodo WHERE
+
+public function index(Request $request)
+    {
+
+        $data = $request->all();
+
+        if(empty($data["item"])){
+            $beers = Beer::all();
+        }
+        if(!empty($data["item"])){
+            $beers = Beer::where("name", "=", $data["item"])->get();
+        }
+
+
+
+        return view("beers.index", compact("beers"));
+    }
+
+---
