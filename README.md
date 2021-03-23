@@ -122,6 +122,13 @@ e modificare la versione come nell'esempio
 
 ---
 
+### NPM FONTAWESOME E IMPORT SU APP.SCSS
+
+npm install --save-dev @fortawesome/fontawesome-free
+
+>copiare questo all'interno di app.scss
+@import '~@fortawesome/fontawesome-free/css/all.min.css';
+
 ### PATH CSS & JS PER LARAVEL
 
 		
