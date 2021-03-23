@@ -6,6 +6,12 @@
 
 ---
 
+### DA INCLUDERE NELL'HEAD PER QUANDO SI FA IL RESPONSIVE
+
+```sh
+<meta name="viewport" content="width=device-width, initial-scale=1">
+```
+
 ### CDN Utilizzate in diversi progetti
 
 - [FONTAWESOME FREE](https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.css) - v5.15.3  
