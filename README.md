@@ -491,7 +491,7 @@ se uniamo questa modale, assegnando a uno dei bottoni della stessa il type **'su
 
 ---
 
-# CREARE UNA SEARCH BASE NELL'CRUD (LARAVEL) 
+## CREARE UNA SEARCH BASE NELL'CRUD (LARAVEL) 
 
 ## STEP 1
 
@@ -531,5 +531,16 @@ public function index(Request $request)
 
         return view("beers.index", compact("beers"));
     }
+
+---
+## INIZIALIZZARE UN PROGETTO A GIT TRAMITE CMD
+
+      cd laravel-boolean
+      git init
+      git remote add origin https://github.com/tuo-nome/nome-progetto.git
+      git add .
+      git commit -am "initial commit"
+      git push --set-upstream origin main
+      git push 
 
 ---
