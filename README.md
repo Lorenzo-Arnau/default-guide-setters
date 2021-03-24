@@ -504,7 +504,6 @@ se uniamo questa modale, assegnando a uno dei bottoni della stessa il type **'su
 
 ---
 
-<<<<<<< Updated upstream
 ## CREARE UNA SEARCH BASE NELL'CRUD (LARAVEL) 
 
 ## STEP 1
@@ -558,20 +557,7 @@ public function index(Request $request)
       git push 
 
 ---
-=======
-## Inizializzare un progetto a GItHub tramite CMd
 
-
-      cd laravel-boolean
-      git init
-      git remote add origin https://github.com/ott-fogliata/laravel-boolean.git
-      git add .
-      git commit -am "initial commit"
-      git push --set-upstream origin main
-      git push 
-
-
----
 
 ## Come inizializzare una tabella nel model senza sfruttare il plurale automatico di Laravel
 
@@ -582,4 +568,4 @@ In model inserire la proprietà
 così laravel si abbina alla tabella chiamata come abbiamo deciso noi senza fare il pluarale
 
 ---
->>>>>>> Stashed changes
+
