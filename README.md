@@ -244,11 +244,21 @@ https://laravel.com/docs/7.x/validation#available-validation-rules
 		php artisan make:controller --resource NomeController
 
 #### Installare Bootstrap.
-
+		
 		composer require laravel/ui:^2.4
 
 		php artisan ui bootstrap
 		npm install
+
+---
+
+#### Installare Bootstrap Auth.
+
+composer require laravel/ui:2.4 //se nn già fatto prima
+php artisan ui bootstrap --auth // attenzione: ricrea il file app.scss (
+quindi cancella gli import aggiuntivi come font awesome e partials) -> fallo all’inizio, dopo bootstrap
+npm install
+php artisan migrate // per lanciare la migratiom creata automaticamente
 
 ---
 
