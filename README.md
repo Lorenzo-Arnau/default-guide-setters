@@ -615,3 +615,51 @@ quindi lanciare comando
 
     composer update 
 ---
+
+
+## Laravel Authentication
+
+1. Nella cartella del progetto Laravel, a terminale: 
+
+    ```
+    composer require laravel/ui:2.4 // se non già fatto prima
+
+    php artisan ui bootstrap --auth // attenzione: ricrea il file app.scss (quindi cancella gli import aggiuntivi come font awesome e partials) -> fare all'inizio, dopo Bootstrap
+    
+    npm install
+    ```
+
+    > Se, dopo aver eseguito il comando npm install, ci viene restituito l'errore `npm ERR! Unexpected end of JSON input while parsing near '...3.9.0","less-loader":'`, provare a risolvere con `npm cache clean --force`.
+
+2. Lanciare la migration (creata automaticamente): `php artisan migrate`.
+
+---
+
+## Seeders and Fakers
+### Creare un seed che generi un numero a piacre di righe con valori generati automaticamente
+1. creare il seeder:
+`php artisan make:seeder NomeTabellaTableSeeder`
+
+2. installare il faker:
+`composer require fakerphp/faker`
+
+3. nel seeder: 
+```
+// all'inizio del file
+use App\Auto
+use Faker\Generator as Faker
+
+// in run
+(Faker $faker)
+
+for($i=0; $i < 100; $i++) {+
+    $auto = new Auto();
+    $auto->model_name = $faker->name();
+    $auto->cubic_capacity = rand(1200, 2000); // possiamo creare un simil faker
+    // tutte le colonne che servono
+    $auto->save();
+}
+```
+
+4. lanciare il seeder: 
+`php artisan db:seed --class=AutoTableSeeder`
