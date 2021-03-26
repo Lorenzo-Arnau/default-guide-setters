@@ -636,30 +636,40 @@ quindi lanciare comando
 ---
 
 ## Seeders and Fakers
-### Creare un seed che generi un numero a piacre di righe con valori generati automaticamente
+### Creare un seed che generi un numero a piacere di righe con valori generati automaticamente
+
 1. creare il seeder:
 `php artisan make:seeder NomeTabellaTableSeeder`
 
 2. installare il faker:
 `composer require fakerphp/faker`
 
-3. nel seeder: 
+3. se non ancora presente, creare il modello:
+    - creare Model `php artisan make:model NomeModello`
+    - in App / NomeModello.php (il Model), facciamo il match manuale della tabella (solo nel caso in cui nome tabella e nome modello nn siano stesso nome al plurale e al singolare) e creiamo le colonne della tabella
+```
+// nella classe NomeModello:
+protected $table = 'nomeTabella'; // solo nel caso in cui nn sia mappata automaticamente
+protected $fillable = ['nome_colonna1', 'nome_colonna2'];
+```
+
+4. nel seeder: 
 ```
 // all'inizio del file
-use App\Auto
+use App\NomeModello
 use Faker\Generator as Faker
 
 // in run
 (Faker $faker)
 
 for($i=0; $i < 100; $i++) {+
-    $auto = new Auto();
-    $auto->model_name = $faker->name();
-    $auto->cubic_capacity = rand(1200, 2000); // possiamo creare un simil faker
-    // tutte le colonne che servono
-    $auto->save();
+    $nomeOggetto = new NomeModello();
+    $nomeOggetto->nome_colonna1 = $faker->name();
+    $nomeOggetto->nome_colonna2 = rand(1200, 2000); // possiamo creare un simil faker
+    // ...tutte le colonne che servono
+    $nomeOggetto->save();
 }
 ```
 
-4. lanciare il seeder: 
-`php artisan db:seed --class=AutoTableSeeder`
+5. lancia il seeder: 
+`php artisan db:seed --class=NomeTabellaTableSeeder`
