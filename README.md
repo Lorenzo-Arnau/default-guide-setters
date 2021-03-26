@@ -591,4 +591,27 @@ In model inserire la proprietà
 così laravel si abbina alla tabella chiamata come abbiamo deciso noi senza fare il pluarale
 
 ---
+## DBAL E MODIFICA NELLE MIGRATION
 
+#### In caso si verifichi l'errore 'Doctrine\DBAL\Driver\PDOMySql\Driver' not found”,
+Nel file composer.json sostituire il doctrine/dbal da
+
+    "doctrine/dbal": "^3.0",
+
+a
+
+    "doctrine/dbal": "^2.0",
+
+
+Lanciare il comando
+
+    composer require doctrine/dbal
+
+nel **CMD**
+
+
+
+quindi lanciare comando
+
+    composer update 
+---
