@@ -615,3 +615,98 @@ quindi lanciare comando
 
     composer update 
 ---
+---
+## MIGRATION DI MODIFICA COLONNA ALLA TABELLA
+
+#### AGGIUNGE UNA NUOVA COLONNA ALLA TABELLA
+    "php artisan make":"migration add_votes_to_users_table --table=users"
+    
+
+
+#### AGGIORNA LA COLONNA DI UNA TABELLA
+    php artisan make:migration update_description_in_products_table
+
+    la migration è da compilare come nell'esempio
+
+    
+    <?php
+
+      use Illuminate\Database\Migrations\Migration;
+      use Illuminate\Database\Schema\Blueprint;
+      use Illuminate\Support\Facades\Schema;
+
+      class UpdateYearInVideogamesTable extends Migration
+      {
+          /**
+          * Run the migrations.
+          *
+          * @return void
+          */
+          public function up()
+          {
+              Schema::table('videogames', function (Blueprint $table) {
+                  $table->integer('year')->change();
+              });
+          }
+
+          /**
+          * Reverse the migrations.
+          *
+          * @return void
+          */
+          public function down()
+          {
+              Schema::table('videogames', function (Blueprint $table) {
+                  $table->smallInteger('year')->change();
+              });
+          }
+      }
+
+#### ANNULLA L'ULTIMA MIGRATION ESEGUITA
+
+    php artisan migrate:rollback
+
+## IMPORTANTE!!!
+Ricordarsi sempre che nel metodo "down" dobbiamo sempre mettere il contrario del metodo up, nell'esempio sopra per esempio stiamo trasformando una colonna che era smallInteger in una Integer, grazie al metodo down possiamo riportarla, in caso di necessità, ad essere di nuovo "smallInteger".
+Oppure se creaimo una nuova colonna nel metodo "up", nel metodo "down" dovremo inserire il comando per eliminarla, come nell'esempio sotto.
+
+        <?php
+
+    use Illuminate\Database\Migrations\Migration;
+    use Illuminate\Database\Schema\Blueprint;
+    use Illuminate\Support\Facades\Schema;
+
+    class AddYearToVideogamesTable extends Migration
+    {
+        /**
+        * Run the migrations.
+        *
+        * @return void
+        */
+        public function up()
+        {
+            Schema::table('videogames', function (Blueprint $table) {
+                $table->smallInteger('year');
+            });
+        }
+
+        /**
+        * Reverse the migrations.
+        *
+        * @return void
+        */
+        public function down()
+        {
+            Schema::table('videogames', function (Blueprint $table) {
+                $table->dropColumn('year');
+            });
+        }
+    }
+
+
+
+---
+
+
+
+
