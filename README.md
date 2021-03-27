@@ -616,7 +616,6 @@ quindi lanciare comando
     composer update 
 ---
 
-
 ## Laravel Authentication
 
 1. Nella cartella del progetto Laravel, a terminale: 
