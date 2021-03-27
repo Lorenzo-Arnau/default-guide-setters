@@ -713,6 +713,61 @@ Oppure se creaimo una nuova colonna nel metodo "up", nel metodo "down" dovremo i
 
 ---
 
+## Laravel Authentication
 
+1. Nella cartella del progetto Laravel, a terminale: 
+
+    ```
+    composer require laravel/ui:2.4 // se non già fatto prima
+
+    php artisan ui bootstrap --auth // attenzione: ricrea il file app.scss (quindi cancella gli import aggiuntivi come font awesome e partials) -> fare all'inizio, dopo Bootstrap
+    
+    npm install
+    ```
+
+    > Se, dopo aver eseguito il comando npm install, ci viene restituito l'errore `npm ERR! Unexpected end of JSON input while parsing near '...3.9.0","less-loader":'`, provare a risolvere con `npm cache clean --force`.
+
+2. Lanciare la migration (creata automaticamente): `php artisan migrate`.
+
+---
+
+## Seeders and Fakers
+### Creare un seed che generi un numero a piacere di righe con valori generati automaticamente
+
+1. creare il seeder:
+`php artisan make:seeder NomeTabellaTableSeeder`
+
+2. installare il faker:
+`composer require fakerphp/faker`
+
+3. se non ancora presente, creare il modello:
+    - creare Model `php artisan make:model NomeModello`
+    - in App / NomeModello.php (il Model), facciamo il match manuale della tabella (solo nel caso in cui nome tabella e nome modello nn siano stesso nome al plurale e al singolare) e creiamo le colonne della tabella
+```
+// nella classe NomeModello:
+protected $table = 'nomeTabella'; // solo nel caso in cui nn sia mappata automaticamente
+protected $fillable = ['nome_colonna1', 'nome_colonna2'];
+```
+
+4. nel seeder: 
+```
+// all'inizio del file
+use App\NomeModello
+use Faker\Generator as Faker
+
+// in run
+(Faker $faker)
+
+for($i=0; $i < 100; $i++) {+
+    $nomeOggetto = new NomeModello();
+    $nomeOggetto->nome_colonna1 = $faker->name();
+    $nomeOggetto->nome_colonna2 = rand(1200, 2000); // possiamo creare un simil faker
+    // ...tutte le colonne che servono
+    $nomeOggetto->save();
+}
+```
+
+5. lancia il seeder: 
+`php artisan db:seed --class=NomeTabellaTableSeeder`
 
 
