@@ -713,7 +713,7 @@ Oppure se creaimo una nuova colonna nel metodo "up", nel metodo "down" dovremo i
 
 ---
 
-## Laravel Authentication
+## LARAVEL AUTHENTICATION
 
 1. Nella cartella del progetto Laravel, a terminale: 
 
@@ -731,7 +731,7 @@ Oppure se creaimo una nuova colonna nel metodo "up", nel metodo "down" dovremo i
 
 ---
 
-## Seeders and Fakers
+## SEEDERS AND FAKER
 ### Creare un seed che generi un numero a piacere di righe con valori generati automaticamente
 
 1. creare il seeder:
