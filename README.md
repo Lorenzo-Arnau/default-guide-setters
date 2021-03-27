@@ -78,13 +78,19 @@ Per verificare le versioni presenti sul pc lanciare i seguenti comandi
 ### Doctrine
 
 Per usare l'update nelle migrations:
-"doctrine/dbal": "^2.0",
-aggiungetelo  al composer.json e poi lanciate
-composer install
+
+
+        "doctrine/dbal": "^2.0"
+
+
+aggiungetelo  al **composer.json** e poi lanciate
+
+
+        composer install
+
+
 qui più informazioni https://stackoverflow.com/questions/33817983/artisan-migration-error-class-doctrine-dbal-driver-pdomysql-driver-not-fo
-Stack OverflowStack Overflow
-artisan migration error "Class 'Doctrine\\DBAL\\Driver\\PDOMySql\\Driver' not found",
-When trying to run a migration I get the error Artisan migration error:Class 'Doctrine\\DBAL\\Driver\\PDOMySql\\Driver' not found I have read the questions here and also see the notes to add:
+
 
 ---
 
