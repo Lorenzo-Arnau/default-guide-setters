@@ -773,4 +773,144 @@ for($i=0; $i < 100; $i++) {+
 5. lancia il seeder: 
 `php artisan db:seed --class=NomeTabellaTableSeeder`
 
+---
+
+## CREARE TRE TABELLE, COLLEGARLE TRA LORO CON RELAZIONI 1->1 E 1->*, E POPOLARLE CON UN SEEDER
+> Nell'esempio, le tabelle fanno riferimento ad un ipotetico blog e sono le seguenti: authors, author_details, posts. 
+La primary key di authors è la foreign key di author_details (relazione 1->1) e quella di posts (relazione 1->*).
+
+1. creare il database.
+
+2. creare i model e le migration (uno per tabella).
+- posso creare model e migration allo stesso tempo (nome model: "Author") : `php artisan make:model Author --migration`; 
+    - nella migration di Author:
+        ```
+        // nella migration creata aggiungiamo (fra id e timestamps):
+        $table->string('name', 64);
+        $table->string('surname', 64);
+        $table->string('email', 64);
+
+        // terminal, lanciare migration: 
+        php artisan migrate
+        ```
+    - nella migration di AuthorDetail aggiungiamo la foreign key corrispondente alla primary key di author (id)
+        ```
+        $table->unsignedBigInteger('author_id') // author xé singolare della tabella authors
+        // la foreign key si mette subito dopo l'id della tabella ospite
+
+        // poi:
+        $table->text('bio');
+        $table->string('website', 2048);
+        $table->string('pic', 2048);
+
+        // alla fine, dopo timestamps, definiamo la foreign key, ovvero la colonna author_id che fa riferimento alla colonna id della tabella authors
+        $table->foreign('author_id') 
+        ->references('id')
+        ->on('authors');
+        
+        // lancio la migration da terminale: 
+        php artisan migrate
+        ```
+    - nella migration di Post ripeto quanto fatto prima, impostando le colonne della tabella e la foreign key (anche in questo caso riferita alla pk id di authors)
+        ```
+        $table->unsignedBigInteger('author_id') // author xé singolare della tabella authors
+        // la foreign key si mette subito dopo l'id della tabella ospite
+
+        // poi:
+        $table->string('title', 255);
+        $table->text('body');
+
+        // alla fine, dopo timestamps, definiamo la foreign key, ovvero la colonna author_id che fa riferimento alla colonna id della tabella authors
+        $table->foreign('author_id') 
+        ->references('id')
+        ->on('authors');
+        
+        // lancio la migration da terminale: 
+        php artisan migrate
+
+        ```
+        > per correggere un errore in locale, prima di aver committato(video 10:19)
+
+
+3. stabilisco le relazioni tra le tabelle
+    - A) all'interno del model di Author, indico il tipo di relazione fra questa tabella e le altre. Ciò mi permetterà di prendere i dati delle altre tabelle direttamente da Author (grazie al tipo di relazione e alla foreign key)
+        ```
+        // funzione che collega il model Author ad AuthorDetail
+        public function detail() { // nome descrittivo a piacere
+            return $this->hasOne('App\AuthorDetail); // indica relazione 1->1 (author ha un solo dettaglio) e namespace
+            // si può anche usare il metodo magico di php `AuthorDetail::class` senza apici (in questo caso, lo "use" all'inizio del file non serve)
+        }
+
+        // funzione che collega il model Author a Post
+        public function posts() {
+            return $this->hasMany('App\Post'); // indica relazione 1->*
+        }
+        ```
+
+    - B) nel model AuthorDetail metto un metodo che indica la sua appartenenza a Author
+        ```
+        public function author() {
+            return $this->belongsTo('App\Author');
+        }
+        ```
+
+    - C) nel model Post metto un metodo che indica la sua appartenenza a Author
+        ```
+        public function author() {
+            return $this->belongsTo('App\Author');
+        }
+        ```
+
+4. creare il seeder e installare il fake
+    - seeder: `php artisan make:seeder PostSeeder` // lo userò per inserire i dati di entrambe le tabelle
+    > creerò + seeder e in seeds/DatabaseSeeder si fa un riferimento a tutti i seeder, poi per lanciarli tutti insieme chiameremo il DatabaseSeeder (avendo creati i singoli, posso anche lanciare solo quello che mi interessa.
+
+    - faker: `composer require fakerphp/faker`
+    - popolo il seeder:
+        ```
+        // all'inizio
+        use Faker\Generator as Faker;
+        use App\Author;
+        use App\AuthorDetail;
+        use App\Post;
+
+        // parametri funzione
+        run(Faker $faker)
+
+        // corpo della funzione:
+        {
+
+            // usare un for per creare più utenti
+            for($i = 0; $i < 20: $i++) {
+
+                // creare un oggetto dove c'è la primary key
+                $author = new Author();
+                $author->name = $faker->firstNmame();
+                $author->surname = $faker->lastName();
+                $author->email = $faker->email();
+                $author->save();
+
+                // creare l'oggetto collegato dalla foreign key
+                $authorDetail = new AuthorDetail();
+                $authorDetail->bio = $faker->text();
+                $authorDetail->website = $faker->url();
+                $authorDetail->pic = 'https://picsum.photos/seed/' . rand(0, 1000) . '/200/300'; // widht e length
+                
+                // creo più post per autore
+                for($l = 0; $l < rand(2, 5); $l++) {
+                    $post = new Post();
+                    $post->title= $faker->text(20);
+                    $post->body= $faker->text(1000);
+                    $author->posts()->save($post);
+                }
+
+                // va nell'autore, prende il suo dettaglio (il metodo creato in Author) e salva i dati appena creati
+                $author->detail()->save($authorDetail); // corrisponde a $authorDetail->author_id = $author->id + save
+            }
+            
+        }
+
+        // lancio il seeder
+        php artisan db:seed --class=PostSeeder
+        ```
 
