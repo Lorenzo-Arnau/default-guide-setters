@@ -863,7 +863,6 @@ La primary key di authors è la foreign key di author_details (relazione 1->1) e
     > creerò + seeder e in seeds/DatabaseSeeder si fa un riferimento a tutti i seeder, poi per lanciarli tutti insieme chiameremo il DatabaseSeeder (avendo creati i singoli, posso anche lanciare solo quello che mi interessa.
 
     - faker: `composer require fakerphp/faker`
-    <!-- // installare generatore random di immagini composer require woodsandwalker/faker-picture -->
     - popolo il seeder:
         ```
         // all'inizio
@@ -877,7 +876,6 @@ La primary key di authors è la foreign key di author_details (relazione 1->1) e
 
         // corpo della funzione:
         {
-            <!-- $faker->addProvider(new WW\Faker\Provider\Picture($faker)); // genera immagini randomiche per utente -->
 
             // usare un for per creare più utenti
             for($i = 0; $i < 20: $i++) {
