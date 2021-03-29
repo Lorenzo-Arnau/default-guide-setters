@@ -667,6 +667,9 @@ quindi lanciare comando
               });
           }
       }
+#### AGGIORNA IL NOME DI UNA COLONNA DI UNA TABELLA
+
+	"php artisan make":"migration rename_columnName_in_tableName_table --table=tableName"
 
 #### ANNULLA L'ULTIMA MIGRATION ESEGUITA
 
