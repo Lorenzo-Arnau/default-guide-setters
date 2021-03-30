@@ -959,8 +959,6 @@ La primary key di authors è la foreign key di author_details (relazione 1->1) e
 > La relazione *->* richiede una tabella che faccia da intermediario e che conservi le fk di posts e di tags collegate tra loro (possono essere tabelle molto lunghe). Il nome della tabella è al singolare: post_tag (video: 11:10).
 > Le tabelle sono create dalle migration, ma sono i model a stabilire le relazioni fra esse.
 
-
-
 1. Creare la tabella tags 
     - a) creare la migration e il modello della tabella tags: `php artisan make:model Tag --migration`
         > Esiste anche una versione compatta: `php artisan make:model Tag -m`
