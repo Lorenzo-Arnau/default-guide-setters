@@ -954,7 +954,7 @@ La primary key di authors è la foreign key di author_details (relazione 1->1) e
 
 ---
 
-## CREARE UNA TABELLA E COLLEGARLA AD UN'ALTRA ESISTENTE TRAMITE RELAZIONE MANY TO MANY
+## CREARE UNA TABELLA (TAGS) E COLLEGARLA AD UN'ALTRA ESISTENTE TRAMITE RELAZIONE MANY TO MANY
 > Stiamo simulando un blog (es. iniziato con scheda 89): creeremo la tabella tags che si collegherà all'esistente tabella posts con relazione many to many
 > La relazione *->* richiede una tabella che faccia da intermediario e che conservi le fk di posts e di tags collegate tra loro (possono essere tabelle molto lunghe). Il nome della tabella è al singolare: post_tag (video: 11:10).
 > Le tabelle sono create dalle migration, ma sono i model a stabilire le relazioni fra esse.
