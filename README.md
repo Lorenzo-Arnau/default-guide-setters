@@ -952,3 +952,164 @@ La primary key di authors è la foreign key di author_details (relazione 1->1) e
         php artisan db:seed --class=PostSeeder
         ```
 
+---
+
+## CREARE UNA TABELLA E COLLEGARLA AD UN'ALTRA ESISTENTE TRAMITE RELAZIONE MANY TO MANY
+> Stiamo simulando un blog (es. iniziato con scheda 89): creeremo la tabella tags che si collegherà all'esistente tabella posts con relazione many to many
+> La relazione *->* richiede una tabella che faccia da intermediario e che conservi le fk di posts e di tags collegate tra loro (possono essere tabelle molto lunghe). Il nome della tabella è al singolare: post_tag (video: 11:10).
+> Le tabelle sono create dalle migration, ma sono i model a stabilire le relazioni fra esse.
+
+
+
+1. Creare la tabella tags 
+    - a) creare la migration e il modello della tabella tags: `php artisan make:model Tag --migration`
+        > Esiste anche una versione compatta: `php artisan make:model Tag -m`
+        > Se volessimo toglier il timestamps (nn crea mai problemi, ma nella tabella intermedia si pò togliere xé nn ha reale motivo di esistere), cancellarlo dalla migration e nel model (se c'è), nella classe scrivo public $timestamps = false
+    
+    - b) definire le colonne della tabella tags:
+        ```
+        //Nella migration di tags, tra id e timestamps:  
+        $table->string('name', 64);
+
+        // lanciare la migration da terminale per creare la tabella
+        php artisan migrate
+        ```
+
+2. Creare la tabella intermedia (post_tag) e definirne le colonne tramite migration
+    > Il nome segue questo schema: nome model 1a entità_nome model 2a entità, entrambe al singolare e minuscole
+    - a) creo la tabella da terminale: `php artisan make:migration create_post_tag_table`
+    - b) all'interno della migration di post_tag:
+        ```
+        // tra id e timestamps
+        $table->unsignedBigInteger('post_id'); // foreign key che collega posts
+        $table->unsignedBigInteger('tag_id'); // foreign key che collega tags
+        
+        // dopo tutte le proprietà/colonne, definire le foreign keys
+        $table->foreign('post_id')
+        ->references('id')
+        ->on('posts');
+
+        $table->foreign('tag_id')
+        ->references('id')
+        ->on('tags');
+
+        ```
+    - c) lanciare la migration per creare la tabella post_tag: `php artisan migrate`
+
+3. Stabilire le relazioni (many to many) fra le tabelle posts e tags tramite i rispettivi modelli
+    - a) in Post.php, dopo la funzione esistente ("author"):
+        ```
+        public function tags() {
+            return $this->belongsToMany('App\Tag'); // stabilisce relazione con il model Tag
+        }
+        ``` 
+    - b) in Tag.php, lo stesso:
+        ```
+        public function posts() {
+            return $this->belongsToMany('App\Post'); // stabilisce relazione con il model Post
+        }
+        ```
+    > ripasso sulle relazioni: https://laravel.com/docs/7.x/eloquent-relationships (nn guardare i polymorphic)
+
+4. Popolare di dati la tabella tags tramite seeder
+    > uso un seeder dedicato, ma potevo usare quello già presente per le altre tabelle
+    a) creare il seeder TagSeeder: `php artisan make:seeder TagSeeder`
+    b) all'interno del seeder:
+        ```
+        // all'inizio definisco il namespace
+        use App\Tag;
+
+        // all'interno di run():
+        $tags = ['sport', calcio, gossip, tecnologia, spazio, salute, economia, cronaca];
+
+        foreach($tags as $tag) {
+            $tagDB = new Tag();
+            $tagDB->name = $tag;
+            $tagDB->save();
+        }
+
+        // lanciare il seeder da terminale: 
+        php artisan db:seed --class=TagSeeder
+        ```
+
+## VISUALIZZARE I DATI DELLA TABELLA TAGS PRECEDENTEMENTE CREATA
+### Scopo: passare i tags e l'autore nel form che permette la creazione dei post, così da aggiungerli (tramite due select) ad ogni post creato. L'autore e i tag selezionati verranno poi visualizzati insieme al relativo post.
+
+> !! Cambiare tutte le route "post" create precedentemente in posts !!
+
+1. Completare le funzioni create e store della crud di Post
+    > il form di create avrà le seguenti caratteristiche: 
+        - un input per il titolo del post, 
+        - una textarea per il suo contenuto, 
+        - un select per l'autore del post, 
+        - un select multiplo per i tag relativi
+
+    - a) in PostController 
+        - in create, prendere i dati delle tabelle authors e tags e renderli disponibili alla view con il form:
+            ```
+            // all'inizio
+            use App\Author;
+            use App\Tag;
+
+            // nel corpo della fn:
+            $authors = Author::all(); // prendo i dati dalla tabella author
+            $tags = Tag::all(); // prendo tutti i tags tramite il modello Tag
+            return view('post.create', compact('authors', 'tags')); // passo i dati al form
+            ```
+        - in store, passo i dati al db
+            ```
+            // passo il post
+            $data = $request->all();
+
+                /*  // opzionale: qui eventuale validazione per evitare manipolazioni lato browser del value "author_id" inviato con select del form
+                    $author_id = data['author_id'];
+                    if((!Author::find($author_id)) {
+                        dd('check stupidello');
+                        // ...redirect verso pagina di cortesia
+                    }; 
+                    // video: 10:39 
+                */
+
+            $post = new Post();
+            $post->fill($data);
+            $post->save();
+
+            // insieme al post passo anche i tags
+            $post->tags()->attach($data['tags']); // attach: metodo di laravel, accetta sia valori singoli sia array (anche array di oggetti), stabilisce relazioni multiple e salva in automatico
+
+            // reindirizzo alla pagina con tutti i post
+            return redirect()->route('posts.index'); 
+            ```
+    - b) in Post imposto la variabile per usare fill()
+        ```
+        // all'interno della classe, prima delle altre funzioni:
+        protected $fillable = ['title', 'body', 'author_id']; // tutti i campi della tabella posts, compresa la fk (author_id)
+        ```
+
+2. Creare il form per l'aggiunta dei post
+    - a) in views/post creare il file create.blade.php, prepararlo con extend e section, comporre un form bootstrap con le caratteristiche elencate all'inizio
+        - il form ha action = "{{route('posts.store)}}", method="post", @csrf, @method('POST')
+        - l'input title ha name="title"
+        - la textarea ha name="body"
+        - la select per gli autori:
+            ```
+            select: name="author_id" // è il campo dell fk che collega le tabelle authors e posts
+                @foreach($authors as $author)
+                    // passiamo l'id (che finirà nella colonna "author_id") ma visualizziamo nome e cognome dell'autore
+                    option: value="{{$author->id}}" >{{$author-> name}} {{author->surname}}<
+            ```
+            > recap video: 10:35
+        - la select multipla per i tags (attributo "multiple" di bootstrap):
+            ```
+            select: name="tags[]" // [] segnala che sto passando un array
+                @foreach($tags as $tag)
+                    option: value={{tag->id}} >{{tag->name}} // come per la select precedente
+            ```
+    - b) in views/post/index, mostrare i tags relativi ad ogni commento
+        ```
+        // aggiungere un th "tags" all'interno di thead
+        // aggiungere un td:
+        $foreach ($post->tags as $tag) // raggiungo i tags tramite la relazione *->* impostata precedentemente con la tabella posts
+        {{$tag->name}}, 
+        ```
+
