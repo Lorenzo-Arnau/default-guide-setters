@@ -830,7 +830,7 @@ La primary key di authors è la foreign key di author_details (relazione 1->1) e
 
 
 3. stabilisco le relazioni tra le tabelle
-    - A) all'interno del model di Author, indico il tipo di relazione fra questa tabella e le altre. Ciò mi permetterà di prendere i dati delle altre tabelle direttamente da Author (grazie al tipo di relazione e alla foreign key)
+    - A) all'interno del model Author, indico il tipo di relazione fra questa tabella e le altre. Ciò mi permetterà di prendere i dati delle altre tabelle direttamente da Author (grazie al tipo di relazione e alla foreign key)
         ```
         // funzione che collega il model Author ad AuthorDetail
         public function detail() { // nome descrittivo a piacere
