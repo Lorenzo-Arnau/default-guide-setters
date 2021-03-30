@@ -668,6 +668,47 @@ quindi lanciare comando
           }
       }
 
+#### AGGIORNA IL NOME DI UNA COLONNA DI UNA TABELLA
+
+	"php artisan make":"migration rename_columnName_in_tableName_table --table=tableName"
+
+la migration è da compilare come nell'esempio
+
+       <?php
+
+      use Illuminate\Database\Migrations\Migration;
+      use Illuminate\Database\Schema\Blueprint;
+      use Illuminate\Support\Facades\Schema;
+
+      class UpdateYearInVideogamesTable extends Migration
+      {
+          /**
+          * Run the migrations.
+          *
+          * @return void
+          */
+          public function up()
+          {
+                Schema::table('posts', function (Blueprint $table) {
+                $table->renameColumn('vecchioNome', 'nuovoNome');
+    });
+
+          }
+
+          /**
+          * Reverse the migrations.
+          *
+          * @return void
+          */
+          public function down()
+          {
+              Schema::table('videogames', function (Blueprint $table) {
+                  $table->renameColumn('nuovoNome', 'vecchioNome');
+              });
+          }
+      }
+
+
 #### ANNULLA L'ULTIMA MIGRATION ESEGUITA
 
     php artisan migrate:rollback
